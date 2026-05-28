@@ -198,11 +198,11 @@ function ManagerDashboard() {
                     {/* Left side — employee info */}
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold text-sm">
-                        #{hire.employee_id}
+                        {(hire.employee_name || 'E').charAt(0).toUpperCase()}
                       </div>
                       <div>
                         <p className="font-semibold text-gray-800 text-sm">
-                          Employee #{hire.employee_id}
+                          {hire.employee_name || `Employee #${hire.employee_id}`}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           <span className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium">

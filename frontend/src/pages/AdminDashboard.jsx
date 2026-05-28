@@ -187,7 +187,7 @@ function AdminDashboard() {
               <table className="w-full">
                 <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
                   <tr>
-                    <th className="px-6 py-3 text-left">Employee ID</th>
+                    <th className="px-6 py-3 text-left">Employee name</th>
                     <th className="px-6 py-3 text-left">Department</th>
                     <th className="px-6 py-3 text-left">Joining Date</th>
                     <th className="px-6 py-3 text-left">Progress</th>
@@ -200,14 +200,14 @@ function AdminDashboard() {
                       key={profile.id}
                       className="hover:bg-gray-50 transition"
                     >
-                      {/* Employee ID */}
+                      {/* Employee name */}
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <div className="w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-sm font-bold">
-                            {profile.employee_id}
+                            {(profile.employee_name || 'E').charAt(0).toUpperCase()}
                           </div>
                           <span className="text-sm text-gray-700 font-medium">
-                            Employee 
+                            {profile.employee_name || `Employee #${profile.employee_id}`}
                           </span>
                         </div>
                       </td>

@@ -210,11 +210,11 @@ function ProfileDetail() {
             {/* Left — profile info */}
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center text-2xl font-bold">
-                #{profile.employee_id}
+                {(profile.employee_name || 'E').charAt(0).toUpperCase()}
               </div>
               <div>
                 <h2 className="text-xl font-bold text-gray-800">
-                  Employee #{profile.employee_id}
+                  {profile.employee_name || `Employee #${profile.employee_id}`}
                 </h2>
                 <div className="flex items-center gap-3 mt-1">
                   <span className="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">
@@ -224,7 +224,7 @@ function ProfileDetail() {
                     Joined {profile.joining_date}
                   </span>
                   <span className="text-gray-400 text-xs">
-                    Manager #{profile.manager_id}
+                    Manager {profile.manager_name || `#${profile.manager_id}`}
                   </span>
                 </div>
               </div>

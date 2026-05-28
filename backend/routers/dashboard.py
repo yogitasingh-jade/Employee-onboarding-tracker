@@ -51,6 +51,7 @@ def get_summary(
             result.append({
                 "profile_id": profile.id,
                 "employee_id": profile.employee_id,
+                "employee_name": profile.employee.name if profile.employee else None,
                 "department": profile.department,
                 "completion_percentage": round(pct, 2)
             })

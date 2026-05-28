@@ -39,7 +39,9 @@ def get_profiles(db:Session = Depends(get_db), current_user: User = Depends(get_
         profile_data = ProfileResponse(
             id= profile.id,
             employee_id=profile.employee_id,
+            employee_name=profile.employee.name if profile.employee else None,
             manager_id=profile.manager_id,
+            manager_name=profile.manager.name if profile.manager else None,
             department=profile.department,
             joining_date=profile.joining_date,
             completion_percentage= round(percentage,2)
@@ -71,7 +73,9 @@ def create_profile(
     return ProfileResponse(
         id=new_profile.id,
         employee_id=new_profile.employee_id,
+        employee_name=new_profile.employee.name if new_profile.employee else None,
         manager_id=new_profile.manager_id,
+        manager_name=new_profile.manager.name if new_profile.manager else None,
         department=new_profile.department,
         joining_date=new_profile.joining_date,
         completion_percentage=0.0
@@ -110,7 +114,9 @@ def get_profile(
     return ProfileDetailResponse(
         id=profile.id,
         employee_id=profile.employee_id,
+        employee_name=profile.employee.name if profile.employee else None,
         manager_id=profile.manager_id,
+        manager_name=profile.manager.name if profile.manager else None,
         department=profile.department,
         joining_date=profile.joining_date,
         completion_percentage=round(percentage, 2),

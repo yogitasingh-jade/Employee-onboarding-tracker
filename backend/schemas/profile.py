@@ -16,7 +16,9 @@ class ProfileCreate(BaseModel):
 class ProfileResponse(BaseModel):
     id:int
     employee_id:int
+    employee_name:Optional[str] = None
     manager_id:int
+    manager_name:Optional[str] = None
     department:str
     joining_date:date
     completion_percentage:Optional[float] = 0.0
@@ -40,7 +42,9 @@ class TaskInProfile(BaseModel):
 class ProfileDetailResponse(BaseModel):
     id:int
     employee_id:int
+    employee_name:Optional[str] = None
     manager_id:int
+    manager_name:Optional[str] = None
     department:str
     joining_date:date
     completion_percentage:Optional[float] = 0.0
