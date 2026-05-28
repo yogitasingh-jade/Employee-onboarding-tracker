@@ -73,7 +73,16 @@ def get_summary(
 
         return {
             "role": "employee",
-            "pending":     [t.title for t in tasks if t.status == "pending"],
-            "in_progress": [t.title for t in tasks if t.status == "in_progress"],
-            "completed":   [t.title for t in tasks if t.status == "completed"]
+            "pending": [
+                {"id": t.id, "title": t.title, "status": t.status}
+                for t in tasks if t.status == "pending"
+            ],
+            "in_progress": [
+                {"id": t.id, "title": t.title, "status": t.status}
+                for t in tasks if t.status == "in_progress"
+            ],
+            "completed": [
+                {"id": t.id, "title": t.title, "status": t.status}
+                for t in tasks if t.status == "completed"
+            ]
         }

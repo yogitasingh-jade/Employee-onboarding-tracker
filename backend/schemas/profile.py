@@ -32,6 +32,7 @@ class ProfileResponse(BaseModel):
 class TaskInProfile(BaseModel):
     id:int
     title:str
+    status:str
     assigned_to:Optional[int] = None
     
     class Config:

@@ -36,7 +36,8 @@ function ProfileDetail() {
     try {
       const response = await API.get(`/profiles/${id}`);
       setProfile(response.data);
-    } catch (err) {
+    }
+     catch (err) {
       if (err.response?.status === 404) {
         setError('Profile not found.');
       } else if (err.response?.status === 403) {
@@ -44,7 +45,8 @@ function ProfileDetail() {
       } else {
         setError('Failed to load profile. Please try again.');
       }
-    } finally {
+    }
+     finally {
       setLoading(false);
     }
   };
@@ -53,7 +55,8 @@ function ProfileDetail() {
     try {
       const response = await API.get('/templates/');
       setTemplates(response.data);
-    } catch (err) {
+    } 
+    catch (err) {
       console.log('Could not load templates');
     }
   };
@@ -70,9 +73,11 @@ function ProfileDetail() {
       setNewTaskTitle('');
       setShowAddTask(false);
       await fetchProfile();
-    } catch (err) {
+    } 
+    catch (err) {
       alert('Failed to add task. Please try again.');
-    } finally {
+    } 
+    finally {
       setAddingTask(false);
     }
   };

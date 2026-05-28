@@ -21,8 +21,12 @@ def update_task(
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
 
-    # Only the assigned user or manager/admin can update
-    if current_user.role == "employee" and task.assigned_to != current_user.id:
+    # Employees can update tasks assigned to them or tasks on their own profile.
+    if (
+        current_user.role == "employee"
+        and task.assigned_to != current_user.id
+        and task.profile.employee_id != current_user.id
+    ):
         raise HTTPException(status_code=403, detail="You can only update your own tasks")
 
     # status value
