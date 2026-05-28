@@ -1,0 +1,19 @@
+import axios from 'axios';
+
+
+// base url of backend
+const API = axios.create({
+  baseURL: 'http://localhost:8000',
+});
+
+// attach jwt tokens before every request
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token && !config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+  
+});
+
+export default API;
