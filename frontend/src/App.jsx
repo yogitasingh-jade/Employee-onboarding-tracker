@@ -9,6 +9,7 @@ import EmployeeDashboard from './pages/EmployeeDashboard';
 import ProfileDetail from './pages/ProfileDetail';
 import Templates from './pages/Templates';
 import CreateProfile from './pages/CreateProfile';
+import AddUser from './pages/AddUser';
 
 function App() {
   return (
@@ -50,6 +51,12 @@ function App() {
           <Route path="/templates" element={
             <PrivateRoute allowedRoles={['admin']}>
               <Templates />
+            </PrivateRoute>
+          } />
+
+          <Route path="/add-user" element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <AddUser />
             </PrivateRoute>
           } />
 

@@ -12,11 +12,13 @@ function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'employee'
+    role: 'admin',
+    adminPassword: ''
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showAdminPrompt, setShowAdminPrompt] = useState(true);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +42,8 @@ function Register() {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        role: formData.role
+        role: 'admin',
+        admin_password: formData.adminPassword
       });
 
       // Auto login after register
@@ -67,6 +70,8 @@ function Register() {
     } catch (err) {
       if (err.response?.status === 400) {
         setError('Email already registered. Try logging in.');
+      } else if (err.response?.status === 403) {
+        setError('Invalid admin registration password.');
       } else {
         setError('Something went wrong. Please try again.');
       }
@@ -84,12 +89,56 @@ function Register() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-blue-900">
-            Create Account
+            Create Admin Account
           </h1>
           <p className="text-gray-500 text-sm mt-1">
-            Register to get started
+            Public registration is only available for admins
           </p>
         </div>
+
+        {showAdminPrompt && (
+          <div className="fixed inset-0 bg-black/40 flex items-center justify-center px-4 z-50">
+            <div className="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6">
+              <h2 className="text-lg font-bold text-gray-800 mb-2">
+                Admin Registration
+              </h2>
+              <p className="text-sm text-gray-500 mb-4">
+                You can only register as admin. If you want to register as admin, put the password.
+              </p>
+              <input
+                type="password"
+                name="adminPassword"
+                value={formData.adminPassword}
+                onChange={handleChange}
+                placeholder="Admin registration password"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <div className="flex gap-3 mt-5">
+                <button
+                  type="button"
+                  onClick={() => navigate('/login')}
+                  className="flex-1 bg-gray-100 text-gray-600 py-2 rounded-lg text-sm hover:bg-gray-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!formData.adminPassword) {
+                      setError('Please enter the admin registration password.');
+                      return;
+                    }
+                    setError('');
+                    setShowAdminPrompt(false);
+                  }}
+                  className="flex-1 bg-blue-700 text-white py-2 rounded-lg text-sm hover:bg-blue-800"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Error box */}
         {error && (
@@ -138,17 +187,12 @@ function Register() {
             <label className="block text-sm font-semibold text-gray-600 mb-1">
               Role
             </label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-            >
-              <option value="employee">Employee</option>
-              <option value="manager">Manager</option>
-              <option value="admin">Admin</option>
-            </select>
+            <input
+              type="text"
+              value="Admin"
+              disabled
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
+            />
           </div>
 
           {/* Password */}

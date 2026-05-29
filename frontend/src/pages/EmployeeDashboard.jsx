@@ -242,7 +242,7 @@ function EmployeeDashboard() {
             </div>
             <div className="p-4 space-y-3">
               {inProgress.length === 0 ? (
-                <p className="text-gray-400 text-xs text-center py-4">
+                <p className="text-gray-400 text-xs text-center py-4 overflow-y-auto">
                   No tasks in progress
                 </p>
               ) : (

@@ -94,6 +94,12 @@ function AdminDashboard() {
             + New Profile
           </button>
           <button
+            onClick={() => navigate('/add-user')}
+            className="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded-lg transition"
+          >
+            + Add User
+          </button>
+          <button
             onClick={() => navigate('/templates')}
             className="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded-lg transition"
           >
